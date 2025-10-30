@@ -2,44 +2,109 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spende lieber sinnvoll</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Echte Orcs brauchen keine Spenden</title>
+
+  <meta property="og:title" content="Echte Orcs brauchen keine Spenden">
+  <meta property="og:description" content="...außer vielleicht für Duschgel. Aber da reicht's grad noch für.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theorc81.github.io/doNo/">
+  <meta name="theme-color" content="#111111">
+
   <style>
+    :root {
+      --bg:#0b0b0b;
+      --fg:#f2f2f2;
+      --muted:#a0a0a0;
+      --orc:#9f2929;
+      --btn:#1a1a1a;
+      --btnHover:#222;
+      --focus:#e04b4b;
+    }
+    * { box-sizing:border-box }
+    html,body { height:100%; margin:0; }
     body {
-      font-family: system-ui, sans-serif;
-      background: #0b0b0b;
-      color: #f8f8f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      margin: 0;
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 70% 85%, #111 0, #0b0b0b 60%, #080808 100%);
+      color: var(--fg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
     }
+    main { width:min(92vw,720px); }
     h1 {
-      font-size: 2rem;
-      max-width: 600px;
-      line-height: 1.4;
+      font-size:clamp(40px,8vw,90px);
+      margin:0 0 12px 0;
+      color:var(--orc);
+      text-shadow:0 0 18px rgba(159,41,41,.35);
+      animation:throb 1.8s ease-in-out infinite;
+      font-weight:900;
+      letter-spacing:0.04em;
     }
-    .orc {
-      color: #9f2929;
-      font-weight: bold;
-      font-family: "Consolas", monospace;
+    @keyframes throb {
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.03);}
     }
     p {
-      margin-top: 1em;
-      color: #999;
+      margin:0.4rem 0 1.2rem;
+      color:var(--muted);
+      font-size:clamp(16px,2.5vw,18px);
+      line-height:1.5;
     }
-    a {
-      color: #9f2929;
+    .cta {
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding:14px 18px;
+      border-radius:10px;
+      background:var(--btn);
+      border:1px solid #2a2a2a;
+      font-weight:700;
+      text-decoration:none;
+      color:var(--fg);
+      box-shadow:0 6px 18px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+      transition:transform .08s ease, background .15s ease, border-color .15s ease;
     }
+    .cta:hover {
+      background:var(--btnHover);
+      transform:translateY(-1px);
+      border-color:#333;
+    }
+    .cta:focus-visible {
+      outline:3px solid var(--focus);
+      outline-offset:3px;
+    }
+    footer { margin-top:20px; font-size:.85rem; color:#6a6a6a; }
+    code { background:#131313; padding:.15rem .35rem; border-radius:6px; border:1px solid #222; }
   </style>
 </head>
 <body>
-  <div>
-    <h1 class="orc">NEIN!</h1>
-    <p>Spende an ein Tierheim oder was Nützliches, bitte 🐾</p>
-    <p><a href="https://gprivate.com/6ivx1" target="_blank">➡️ Zum Beispiel hier...</a></p>
-  </div>
+  <main>
+    <h1>NEIN!</h1>
+    <p>
+      Echte Orcs brauchen keine Spenden...<br>
+      außer vielleicht für Duschgel – aber da reicht’s grad noch für 😏
+    </p>
+    <a class="cta" id="donolink" rel="noopener noreferrer" target="_blank"
+       href="https://gprivate.com/6ivx1">
+      ➜ Wenn du spenden willst, dann richtig.
+    </a>
+    <footer>
+      <small>🐾 Spende an ein Tierheim oder was wirklich Nützliches.</small>
+    </footer>
+  </main>
+
+  <script>
+    // Optional: Auto-Redirect, wenn ?r=1 gesetzt ist
+    (function() {
+      const params = new URLSearchParams(location.search);
+      if (params.get("r") === "1") {
+        const href = document.getElementById("donolink").href;
+        setTimeout(() => location.href = href, 300);
+      }
+    })();
+  </script>
 </body>
 </html>
